@@ -11,15 +11,6 @@ describe('FetchDriverUseCase', () => {
 	beforeAll(() => {
 		fetchDriverUseCase = new FetchDriverUseCase(requestService);
 	});
-	it('FetchURLDriver ', () => {
-		const configure = {
-			filter: 'alonso',
-		};
-		const fetchDriver = fetchDriverUseCase.preparFormatURLDriver(configure);
-		// eslint-disable-next-line no-console
-		console.log(fetchDriver);
-		expect(fetchDriver).toBeTruthy();
-	});
 	it('Fetch Driver ', async () => {
 		const configure = {
 			filter: 'alonso',

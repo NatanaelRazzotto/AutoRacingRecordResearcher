@@ -12,16 +12,6 @@ describe('RaceResultUseCase', () => {
 		fetchResultRaceUseCase = new FetchResultRaceUseCase(requestService);
 	});
 
-	it('Gera URL ', () => {
-		const configureFilter = {
-			year: 2020,
-			round: 17,
-			grid: 3,
-		};
-		const resultRace = fetchResultRaceUseCase.generateURL(configureFilter);
-		// console.log(resultRace);
-		expect(resultRace).toBeTruthy();
-	});
 	it('Serach URL ', async () => {
 		const configureFilter = {
 			year: 2020,

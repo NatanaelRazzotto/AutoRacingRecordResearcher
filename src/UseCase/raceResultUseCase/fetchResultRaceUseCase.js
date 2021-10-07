@@ -1,13 +1,15 @@
 const {
   RandomNumberService,
 } = require("../../serviceDomain/randomNumberService");
+const {
+  UrlService,
+} = require("../../serviceDomain/urlService");
 
 class FetchResultRaceUseCase {
   constructor(requestService) {
     this.races = [];
     this.requestService = requestService;
     this.randomNumberService = new RandomNumberService();
-    this.url = "https://ergast.com/api/f1";
   }
 
   async execute(configureFilter) {
@@ -48,14 +50,10 @@ class FetchResultRaceUseCase {
   } */
 
   async fecthResults(configureFilter) {
-    const urlSearch = this.generateURL(configureFilter);
-    // console.log(urlSearch);
+    const urlSearch = UrlService.generateURLresults(configureFilter);
+    console.log(urlSearch);
     const resultFetch = await this.requestService.requestFetch(urlSearch);
     return resultFetch;
-  }
-
-  generateURL(configureFilter) {
-    return `${this.url}/${configureFilter.year}/${configureFilter.round}/results.json`;
   }
 
   generateParamURL() {
