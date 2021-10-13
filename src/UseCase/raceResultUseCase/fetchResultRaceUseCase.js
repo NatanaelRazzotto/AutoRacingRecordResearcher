@@ -4,12 +4,18 @@ const {
 const {
   UrlService,
 } = require("../../serviceDomain/urlService");
+const {
+  FetchRacesUseCase,
+} = require("../../UseCase/racesUseCase/fetchRacesUseCase");
+const { RepositoryResults } = require('../../repository/sequelize/repositoryClass/repositoryResults');
 
 class FetchResultRaceUseCase {
   constructor(requestService) {
     this.races = [];
     this.requestService = requestService;
     this.randomNumberService = new RandomNumberService();
+    this.fetchRacesUseCase = new FetchRacesUseCase();
+    this.repositoryResults = new RepositoryResults();
   }
 
   async execute(configureFilter) {
@@ -31,7 +37,35 @@ class FetchResultRaceUseCase {
     this.fetch = fetchData.MRData.RaceTable;
     // const table = this.getRaceTable();
     const results = this.getResults();
-    return results;
+    const persist = this.persitencia(results);
+    return persist;
+  }
+  async persitencia(Resultados) {
+    const racePersistido = await this.fetchRacesUseCase.persistenceOfObjects(Resultados);
+    //continuar daqui
+    const objectResult = this.preparObjectResults(Resultados.Results[0], racePersistido.raceId);
+    const resultPersistido = await this.repositoryResults.create(objectResult);
+    return resultPersistido;
+  }
+  preparObjectResults(Result, idCircuit) {
+    const objectResult = {
+      raceId: idCircuit,
+      driverId: Result.Driver.driverId,//Driver: [Object],
+      constructorId: Result.Constructor.constructorId,//Constructor: [Object],
+      number: Result.number,
+      grid: Result.grid,
+      position: Result.position,
+      positionText: Result.positionText,
+      points: Result.points,
+      laps: Result.laps,
+      statusId: Result.status,//status
+      //fastestLap: Result.FastestLap.lap,
+      // rank: Result.FastestLap.rank,
+      //fastestLapTime: Result.FastestLap.Time.time,
+      //fastestLapSpeed: Result.FastestLap.AverageSpeed.speed,
+
+    }
+    return objectResult;
   }
 
   /* async execute(configureFilter) {

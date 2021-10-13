@@ -25,11 +25,21 @@ describe('Repository', () => {
             name: "Yas Marina Circuit",
             location: 'Abu Dhabi',
             country: 'UAE',
-            lat: '24.4672',
-            lng: '54.6031',
+            lat: 24.4672,
+            lng: 54.6031,
             url: 'http://en.wikipedia.org/wiki/Yas_Marina_Circuit',
             updatedAt: expect.any(Date),
             createdAt: expect.any(Date),
         });
     });
+    /* it('FindAll', async () => {
+         const received = await repositoryCircuits.findAllWhere();
+         if (received.length != 0) {
+             console.log(received);
+         }
+         else {
+             console.log("nada");
+         }
+ 
+     });*/
 })
