@@ -5,7 +5,7 @@ describe('Repository', () => {
     it('Sync DB', async () => {
         const received = await database.sync();
         console.log(received);
-        expect(received.config.database).toEqual('baseF1');
+        expect(received.config.database).toEqual('f1Base');
     });
     it('create Results', async () => {
         const result = {
