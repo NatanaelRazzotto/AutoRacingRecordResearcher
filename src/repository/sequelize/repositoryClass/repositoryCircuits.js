@@ -15,6 +15,8 @@ class RepositoryCircuits {
             const received = await ModelCircuits.create(Circuits);
             return received.dataValues;
         }
+        console.log("não validou");
+        return validate;
     }
 
     async findAllWhere(Circuit) {

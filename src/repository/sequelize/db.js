@@ -7,7 +7,7 @@ const {
 // const sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, {
 const sequelize = new Sequelize(database, username, password, {
   dialect: "mysql",
-  host: "127.0.0.1",
+  host: "localhost",//127.0.0.1
   logging: false,
 });
 

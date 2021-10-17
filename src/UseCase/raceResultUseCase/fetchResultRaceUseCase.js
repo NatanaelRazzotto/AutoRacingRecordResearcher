@@ -47,6 +47,10 @@ class FetchResultRaceUseCase {
     const resultPersistido = await this.repositoryResults.create(objectResult);
     return resultPersistido;
   }
+  async getPersitencia() {
+    const requestPersisted = await this.repositoryResults.findAll();
+    return requestPersisted;
+  }
   preparObjectResults(Result, idCircuit) {
     const objectResult = {
       raceId: idCircuit,
